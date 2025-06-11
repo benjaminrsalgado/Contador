@@ -9,13 +9,23 @@ import SwiftUI
 
 struct ContentView: View {
     var body: some View {
-        VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundStyle(.tint)
-            Text("Hello, world!")
+        Vista()
+    }
+}
+class PerfilViewModel: ObservableObject {
+    @Published var nombre = "Benjamin"
+    @Published var contador = 0
+    
+}
+
+struct Vista: View{
+    @StateObject var varibale = PerfilViewModel()
+    var body: some View{
+        Button(action: {
+            varibale.contador += 1
+        }){Text("sumaremos:  \(varibale.contador)")
+            
         }
-        .padding()
     }
 }
 
