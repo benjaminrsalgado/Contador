@@ -9,26 +9,31 @@ import SwiftUI
 
 struct ContentView: View {
     var body: some View {
-        Vista()
+        animoCard()
     }
-}
-class PerfilViewModel: ObservableObject {
-    @Published var nombre = "Benjamin"
-    @Published var contador = 0
     
 }
-
-struct Vista: View{
-    @StateObject var varibale = PerfilViewModel()
+class EstadoViewModel: ObservableObject{
+    @Published var estadoDeAnimo  = "Feliz"
+    
+}
+struct animoCard: View{
+    @StateObject var animo1 = EstadoViewModel()
     var body: some View{
         Button(action: {
-            varibale.contador += 1
-        }){Text("sumaremos:  \(varibale.contador)")
+            if animo1.estadoDeAnimo == "Feliz" {
+                animo1.estadoDeAnimo = "Triste"
+            } else {
+                animo1.estadoDeAnimo = "Feliz"
+            }
+        }){
+            Text(animo1.estadoDeAnimo)
+                .foregroundColor(.orange)
+                .font(.title)
             
         }
     }
 }
-
 #Preview {
     ContentView()
 }
