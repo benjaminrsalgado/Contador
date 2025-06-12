@@ -9,28 +9,35 @@ import SwiftUI
 
 struct ContentView: View {
     var body: some View {
-        animoCard()
+     TareaCard()
     }
     
 }
-class EstadoViewModel: ObservableObject{
-    @Published var estadoDeAnimo  = "Feliz"
-    
+
+class TareaViewModel: ObservableObject{
+    @Published var tarea = "Aprender SwiftUI"
+     
+    func tareaa(){
+        if tarea == "Aprender SwiftUI"{
+            tarea = "Practicar @StateObject"
+        }else{
+            tarea = "Aprender SwiftUI"
+        }
+    }
 }
-struct animoCard: View{
-    @StateObject var animo1 = EstadoViewModel()
+
+struct TareaCard: View{
+    @StateObject var guardar = TareaViewModel()
     var body: some View{
-        Button(action: {
-            if animo1.estadoDeAnimo == "Feliz" {
-                animo1.estadoDeAnimo = "Triste"
-            } else {
-                animo1.estadoDeAnimo = "Feliz"
-            }
-        }){
-            Text(animo1.estadoDeAnimo)
-                .foregroundColor(.orange)
+        VStack{
+            Text(guardar.tarea)
                 .font(.title)
-            
+                .padding()
+            Button(action: {
+                guardar.tareaa()
+            }) {
+                Text("Cambiar tarea")
+            }
         }
     }
 }
