@@ -9,38 +9,43 @@ import SwiftUI
 
 struct ContentView: View {
     var body: some View {
-     TareaCard()
+        ContadorView()
     }
     
 }
 
-class TareaViewModel: ObservableObject{
-    @Published var tarea = "Aprender SwiftUI"
-     
-    func tareaa(){
-        if tarea == "Aprender SwiftUI"{
-            tarea = "Practicar @StateObject"
+class contador: ObservableObject{
+    @Published var contador1 = 0
+    @Published var limiteAlcanzado = false
+    func limite(){
+        if contador1 == 10{
+            limiteAlcanzado = true
         }else{
-            tarea = "Aprender SwiftUI"
+            limiteAlcanzado = false
         }
     }
 }
 
-struct TareaCard: View{
-    @StateObject var guardar = TareaViewModel()
+struct ContadorView: View{
+    @StateObject var contadorModel = contador()
     var body: some View{
         VStack{
-            Text(guardar.tarea)
-                .font(.title)
-                .padding()
-            Button(action: {
-                guardar.tareaa()
-            }) {
-                Text("Cambiar tarea")
+            Button(action:{
+                contadorModel.contador1 += 1
+                contadorModel.limite()
+            }){
+                Text("Se sumara + 1: \(contadorModel.contador1)")
+                
+            }
+            .disabled(contadorModel.limiteAlcanzado)
+            if contadorModel.limiteAlcanzado {
+                Text("Límite alcanzado")
+                    .foregroundColor(.red)
             }
         }
     }
 }
+
 #Preview {
     ContentView()
 }
