@@ -9,7 +9,12 @@ import SwiftUI
 
 struct ContentView: View {
     var body: some View {
-      LinternaCard()
+        ZStack{
+            Color.black
+                .ignoresSafeArea()
+            LinternaCard()
+        }
+     
     }
 }
 
@@ -26,7 +31,11 @@ struct LinternaCard: View{
         VStack{
             Button(action:{
                 linterna1.check()
-            }){Text(linterna1.estaEncendida ? "esta encendida": "esta apagada")
+            }){Label(
+                linterna1.estaEncendida ? "Está encendida" : "Está apagada",
+                systemImage: linterna1.estaEncendida ? "flashlight.on.fill" : "flashlight.off.fill"
+            )
+            .foregroundColor(.yellow)
                 
             }
         }
