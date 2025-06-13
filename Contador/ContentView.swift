@@ -9,38 +9,35 @@ import SwiftUI
 
 struct ContentView: View {
     var body: some View {
-        ZStack{
-            Color.black
-                .ignoresSafeArea()
-            LinternaCard()
-        }
-     
+        puertaView()
     }
 }
 
-class linterna: ObservableObject{
-    @Published var estaEncendida = false
+class PuertaViewModel: ObservableObject{
+    @Published var door = true
     
     func check(){
-        estaEncendida.toggle()
+        door.toggle()
     }
 }
-struct LinternaCard: View{
-    @StateObject var linterna1 = linterna()
+
+struct puertaView: View{
+    @StateObject var puertaModel = PuertaViewModel()
     var body: some View{
         VStack{
-            Button(action:{
-                linterna1.check()
-            }){Label(
-                linterna1.estaEncendida ? "Está encendida" : "Está apagada",
-                systemImage: linterna1.estaEncendida ? "flashlight.on.fill" : "flashlight.off.fill"
+            Button (action:{
+                puertaModel.check()
+            }){
+                Label(
+                puertaModel.door ? "esta abierta": "esta cerrada",
+                systemImage: puertaModel.door ? "door.open" : "door.closed"
             )
-            .foregroundColor(.yellow)
                 
             }
         }
     }
 }
+
 #Preview {
     ContentView()
 }
