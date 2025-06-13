@@ -9,25 +9,26 @@ import SwiftUI
 
 struct ContentView: View {
     var body: some View {
-        notificacionesCard()
+      LinternaCard()
     }
 }
 
-class notificaciones: ObservableObject{
-    @Published var activacion : Bool = true
+class linterna: ObservableObject{
+    @Published var estaEncendida = false
     
-    func desactivar(){
-        activacion.toggle()
+    func check(){
+        estaEncendida.toggle()
     }
 }
-
-struct notificacionesCard: View{
-    @StateObject var viewNotificacion = notificaciones()
+struct LinternaCard: View{
+    @StateObject var linterna1 = linterna()
     var body: some View{
-        Button(action:{
-            viewNotificacion.desactivar()
-        }){Text(viewNotificacion.activacion ? "🔔 Notificaciones activadas" : "🔕 Notificaciones desactivadas")
-            
+        VStack{
+            Button(action:{
+                linterna1.check()
+            }){Text(linterna1.estaEncendida ? "esta encendida": "esta apagada")
+                
+            }
         }
     }
 }
