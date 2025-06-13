@@ -9,35 +9,28 @@ import SwiftUI
 
 struct ContentView: View {
     var body: some View {
-        ViewModel()
-    }
-    
-}
-class LikeViewModel: ObservableObject{
-    @Published var leGusta = false
-    
-    func toggleLike(){
-        leGusta.toggle()
+        notificacionesCard()
     }
 }
 
-struct ViewModel: View{
-    @StateObject var viewModel = LikeViewModel()
+class notificaciones: ObservableObject{
+    @Published var activacion : Bool = true
+    
+    func desactivar(){
+        activacion.toggle()
+    }
+}
+
+struct notificacionesCard: View{
+    @StateObject var viewNotificacion = notificaciones()
     var body: some View{
-        VStack{
-            Button(action:{
-                viewModel.toggleLike()
-            }){Label(
-                viewModel.leGusta ? "Quitar like" : "Dar like",
-                systemImage: viewModel.leGusta ? "heart.fill" : "heart"
-            )
-               
-            }
+        Button(action:{
+            viewNotificacion.desactivar()
+        }){Text(viewNotificacion.activacion ? "🔔 Notificaciones activadas" : "🔕 Notificaciones desactivadas")
+            
         }
     }
 }
-
-
 #Preview {
     ContentView()
 }
