@@ -9,35 +9,28 @@ import SwiftUI
 
 struct ContentView: View {
     var body: some View {
-        puertaView()
+   ToDoView()
     }
 }
 
-class PuertaViewModel: ObservableObject{
-    @Published var door = true
+class ToDo: ObservableObject{
+    @Published var tarea: Bool = true
     
     func check(){
-        door.toggle()
+        tarea.toggle()
     }
 }
 
-struct puertaView: View{
-    @StateObject var puertaModel = PuertaViewModel()
+struct ToDoView: View{
+    @StateObject var tarea1 = ToDo()
     var body: some View{
-        VStack{
-            Button (action:{
-                puertaModel.check()
-            }){
-                Label(
-                puertaModel.door ? "esta abierta": "esta cerrada",
-                systemImage: puertaModel.door ? "door.open" : "door.closed"
-            )
-                
-            }
+        Button(action:{
+            tarea1.check()
+        }){Text(tarea1.tarea ? "Aprender SwiftUI" : "Practicar @StateObjec")
+            
         }
     }
 }
-
 #Preview {
     ContentView()
 }
