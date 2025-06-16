@@ -26,7 +26,7 @@ struct ToDoView: View{
     var body: some View{
         Button(action:{
             tarea1.check()
-        }){Text(tarea1.tarea ? "Aprender SwiftUI" : "Practicar @StateObjec")
+        }){Text(tarea1.tarea ? "Aprender " : "Practicar @State")
             
         }
     }
